@@ -10,14 +10,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "divisi")
-public class Divisi {
+@Table(name = "user")
+public class Login {
     @Id
     @GeneratedValue
-	@Column(name = "id_divisi")
-    private int idDivisi;
+    @Column(name = "username")
+    private String username;
 
-	@Column(name = "name_division")
-    private String nameDivision;
-    private int company;
+    @Column(name = "password")
+    private String password;
 }

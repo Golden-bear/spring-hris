@@ -20,6 +20,7 @@ public class DivisiController {
 
     @PostMapping("/tambahdivisi")
     public Divisi addDivisi(@RequestBody Divisi divisi){
+        if(divisi.getNameDivision() == null) throw new RuntimeException();
         return service.saveDivisi(divisi);
     }
 
@@ -34,7 +35,7 @@ public class DivisiController {
     }
 
     @GetMapping("/divisibycompany/{company}")
-    public Divisi findDivisiyComapny(@PathVariable int company){
+    public List<Divisi> findDivisiyComapny(@PathVariable int company){
         return service.getDivisiByCompany(company);
     }
 

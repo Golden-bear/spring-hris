@@ -1,5 +1,6 @@
 package com.rilo.hris.service;
 
+import lombok.AllArgsConstructor;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,23 +10,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class DivisiService {
-    @Autowired
+   
     private DivisiRepository repository;
 
     public Divisi saveDivisi(Divisi divisi){
+
         return repository.save(divisi);
     }
 
     public List<Divisi> getDivisi(){
-        return repository.findAll();
+        try{
+            var listDivisi  =  repository.findAll();
+            return listDivisi;
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
     }
 
-    public Divisi getDivisiById(int id_divisi){
-         Optional<?> dt = findById(id_divisi);
+    public Divisi getDivisiById(int idDivisi){
+        Optional<Divisi> dt = repository.findById(idDivisi);
+        return dt.orElseThrow();
     }
 
-    public Divisi getDivisiByCompany(int company){
+    public List<Divisi> getDivisiByCompany(int company){
         return repository.findByCompany(company);
     }
 
@@ -35,8 +45,8 @@ public class DivisiService {
     }
 
     public Divisi updateDivisi(Divisi divisi){
-        Divisi existingDivisi=repository.findById(divisi.getId_divisi()).orElse(divisi);
-        existingDivisi.setName_division(divisi.getName_division());
+        Divisi existingDivisi=repository.findById(divisi.getIdDivisi()).orElse(divisi);
+        existingDivisi.setNameDivision(divisi.getNameDivision());
         return repository.save(existingDivisi);
     }
 }
