@@ -19,5 +19,6 @@ public class Divisi {
 
 	@Column(name = "name_division")
     private String nameDivision;
+    @Column(name = "company")
     private int company;
 }

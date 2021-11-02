@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 @RestController
 public class DivisiController {
 
@@ -19,33 +19,33 @@ public class DivisiController {
     private DivisiService service;
 
     @PostMapping("/tambahdivisi")
-    public Divisi addDivisi(@RequestBody Divisi divisi){
+    public ResponseEntity addDivisi(@RequestBody Divisi divisi){
         if(divisi.getNameDivision() == null) throw new RuntimeException();
         return service.saveDivisi(divisi);
     }
 
     @GetMapping("/getalldivisi")
-    public List<Divisi> findAllDivisi(){
+    public ResponseEntity findAllDivisi(){
         return service.getDivisi();
     }
 
     @GetMapping("/divisi/{id_divisi}")
-    public Divisi findDivisiById(@PathVariable int id_divisi){
+    public ResponseEntity findDivisiById(@PathVariable int id_divisi){
         return service.getDivisiById(id_divisi);
     }
 
     @GetMapping("/divisibycompany/{company}")
-    public List<Divisi> findDivisiyComapny(@PathVariable int company){
+    public ResponseEntity findDivisiyComapny(@PathVariable int company){
         return service.getDivisiByCompany(company);
     }
 
-    @PutMapping("/divisiupdate/{company}")
-    public Divisi findDivisiyComapny(@RequestBody Divisi divisi){
+    @PutMapping("/divisiupdate/{id_divis}")
+    public ResponseEntity findDivisiyComapny(@RequestBody Divisi divisi){
         return service.updateDivisi(divisi);
     }
 
     @DeleteMapping("/divisi/{id_divisi}")
-    public String deleteDivision(@PathVariable int id_divisi){
+    public ResponseEntity deleteDivision(@PathVariable int id_divisi){
         return service.deleteDivisi(id_divisi);
     }
 }

@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 
 import java.util.Locale;
 
-
+import org.springframework.http.HttpStatus;
 import com.rilo.hris.entity.Login;
 import com.rilo.hris.repository.LoginRepository;
 import lombok.SneakyThrows;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.DatatypeConverter;
 
 import com.rilo.hris.model.ResponseObject;
+import com.rilo.hris.model.ResponseModify;
 import org.springframework.http.RequestEntity;
 @Service
 @AllArgsConstructor
@@ -45,7 +46,7 @@ public class LoginService {
 
         }
 
-        return new ResponseEntity(new ResponseObject(1,"Login Sukses"));
+        return new ResponseEntity(new ResponseModify(1,"Login Sukses"),HttpStatus.OK);
     }
 
 
