@@ -1,37 +1,50 @@
 package com.rilo.hris.service;
 
-import com.rilo.hris.model.ResponseObject;
-import lombok.AllArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.List;
-import java.util.Date;
-import java.util.Optional;
-import java.text.SimpleDateFormat;
 import com.rilo.hris.entity.Divisi;
-import com.rilo.hris.repository.DivisiRepository;
-import org.springframework.stereotype.Service;
 import com.rilo.hris.model.ResponseList;
 import com.rilo.hris.model.ResponseModify;
-import org.springframework.http.ResponseEntity;
+import com.rilo.hris.model.ResponseObject;
+import com.rilo.hris.repository.DivisiRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Map;
+import java.util.Optional;
+
+
 @Service
 @AllArgsConstructor
 public class DivisiService {
-//    SimpleDateFormat uniq_format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-//    SimpleDateFormat configGetDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//    SimpleDateFormat configGetTime = new SimpleDateFormat("HH:mm:ss");
-    private Logger logger = LoggerFactory.getLogger(DivisiService.class);
-    private DivisiRepository repository;
 
-    public ResponseEntity<?> saveDivisi(Divisi divisi){
+
+    private DivisiRepository repository;
+    //private Logger logg;
+
+//    @Autowired
+//    public DivisiService(DivisiRepository repository) {
+//        this.repository =repository;
+//        //logg = LoggerFactory.getLogger(DivisiService.class);
+//    }
+
+    public void save(Divisi divisi){
+        this.repository.save(divisi);
+    }
+
+    public ResponseEntity<?> saveDivisi(Map<String, String> body){
         try{
-            repository.save(divisi);
+            //logg.info("hit save divisi");
+        	Divisi div = new Divisi();
+        	div.setCompany(Integer.parseInt(body.get("idCompany")));
+        	div.setNameDivision(body.get("nameDivision"));
+      
+            repository.save(div);
+            
             return new ResponseEntity(new ResponseModify(1,"Divisi Berhasil Dihapus"),HttpStatus.OK);
         }catch (Exception e){
-            logger.error(e.toString());
+        	//logg.error(e.toString());
             return new ResponseEntity(new ResponseModify(0,e.getMessage()),HttpStatus.OK);
         }
 
@@ -42,10 +55,12 @@ public class DivisiService {
         String method = "GET";
         String url = "/getalldivisi";
         try{
-            logger.info(method+" "+url);
+        	System.out.println(new Date());
+        	//logg.info(method+" "+url);
             var listDivisi  =  repository.findAll();
             return new ResponseEntity(new ResponseList(1,"get Data Sukses", listDivisi ),HttpStatus.OK);
         }catch (Exception e){
+        	//logg.error(method+" "+url+ e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -53,6 +68,7 @@ public class DivisiService {
 
     public ResponseEntity<?> getDivisiById(int idDivisi){
         try{
+        	//logg.info("berhasil get by id");
             Optional<Divisi> dt = repository.findById(idDivisi);
             return new ResponseEntity(new ResponseObject(1,"get Data Sukses", dt ),HttpStatus.OK);
         }catch (Exception e){
@@ -63,6 +79,7 @@ public class DivisiService {
 
     public ResponseEntity<?> getDivisiByCompany(int company){
         try{
+            //logg.info("divisi byCompany");
             var listDivisiByCompany  =  repository.findByCompany(company);
             return new ResponseEntity(new ResponseList(1,"get Data Sukses", listDivisiByCompany ),HttpStatus.OK);
         }catch (Exception e){
@@ -73,6 +90,7 @@ public class DivisiService {
 
     public ResponseEntity<?> deleteDivisi(int id_divisi){
         try{
+            //logg.info("delete divisi");
             repository.deleteById(id_divisi);
             return new ResponseEntity(new ResponseModify(1,"Divisi Berhasil Dihapus"),HttpStatus.OK);
         }catch (Exception e){
@@ -82,6 +100,7 @@ public class DivisiService {
 
     public ResponseEntity<?> updateDivisi(Divisi divisi){
         try{
+            //logg.info("update divisi");
             Divisi existingDivisi=repository.findById(divisi.getIdDivisi()).orElse(divisi);
             existingDivisi.setNameDivision(divisi.getNameDivision());
             repository.save(existingDivisi);

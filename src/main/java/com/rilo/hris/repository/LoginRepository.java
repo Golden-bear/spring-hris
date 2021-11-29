@@ -10,4 +10,5 @@ import java.util.List;
 public interface LoginRepository extends JpaRepository<Login,String> {
     //@Query(value = "SELECT * FROM divisi WHERE company = ?1",nativeQuery = true)
     //List<Login> findByCompany(int company); //custom query karena defauld by id doang
+
 }

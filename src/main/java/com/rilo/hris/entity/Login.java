@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+@Data //tidak perlu membuat getter and setter jika menggunakan @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,4 +19,26 @@ public class Login {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name= "id_employee")
+	private int idEmployee;
+
+    @Column(name = "id_company")
+	private int idCompany;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

@@ -1,0 +1,9 @@
+2021-11-02 20:15:22 INFO  Starting HrisApplication using Java 17.0.1 on DESKTOP-SOE53SF with PID 6932 (D:\java_hris\hris\target\classes started by Rilo Pambudi in D:\java_hris\hris)
+2021-11-02 20:15:22 DEBUG Running with Spring Boot v2.5.6, Spring v5.3.12
+2021-11-02 20:15:22 INFO  No active profile set, falling back to default profiles: default
+2021-11-02 20:15:31 INFO  Started HrisApplication in 9.958 seconds (JVM running for 11.779)
+2021-11-02 20:16:01 INFO  GET /getalldivisi
+2021-11-02 21:34:44 INFO  Starting HrisApplication using Java 17.0.1 on DESKTOP-SOE53SF with PID 13368 (D:\java_hris\hris\target\classes started by Rilo Pambudi in D:\java_hris\hris)
+2021-11-02 21:34:44 DEBUG Running with Spring Boot v2.5.6, Spring v5.3.12
+2021-11-02 21:34:44 INFO  No active profile set, falling back to default profiles: default
+2021-11-02 21:34:52 INFO  Started HrisApplication in 9.335 seconds (JVM running for 11.221)
